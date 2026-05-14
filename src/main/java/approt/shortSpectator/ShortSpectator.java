@@ -1,5 +1,8 @@
 package approt.shortSpectator;
 
+import approt.shortSpectator.Listeners.GameModeChangeListener;
+import approt.shortSpectator.Listeners.PlayerJoinListener;
+import approt.shortSpectator.Listeners.PlayerTeleportListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -32,6 +35,11 @@ public final class ShortSpectator extends JavaPlugin {
 
         // Register the tab completer
         Objects.requireNonNull(getCommand("shortspectator")).setTabCompleter(new ShortSpectatorTabCompleter());
+
+        // Register the Listeners
+        getServer().getPluginManager().registerEvents(new PlayerTeleportListener(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
+        getServer().getPluginManager().registerEvents(new GameModeChangeListener(this), this);
 
         // Creates a runnable that will check and teleport spectators out of range
         new BukkitRunnable()
@@ -94,6 +102,30 @@ public final class ShortSpectator extends JavaPlugin {
         enabled = getConfig().getBoolean("enabled", true);
         inPlayer = getConfig().getBoolean("require-in-player", false);
         spectateMessage = getConfig().getString("spectator-message", "§cYou must spectate a valid player!");
+    }
+
+    public void setSpectatorTarget(Player player)
+    {
+        if(enabled && !player.hasPermission("shortspectator.bypass")) {
+            Player closest = null;
+            double dist = Double.MAX_VALUE;
+            double tempDist;
+
+            for (Player target : Bukkit.getOnlinePlayers()) // Finds the closest player
+            {
+                if (target == player)
+                    continue;
+                tempDist = player.getLocation().distanceSquared(target.getLocation());
+                if (tempDist < dist) {
+                    dist = tempDist;
+                    closest = target;
+                }
+            }
+
+            if (closest != null) {
+                player.setSpectatorTarget(closest);
+            }
+        }
     }
 
     @Override
