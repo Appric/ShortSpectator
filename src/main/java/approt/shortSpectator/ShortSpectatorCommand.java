@@ -42,6 +42,23 @@ public class ShortSpectatorCommand implements CommandExecutor {
             else
                 sender.sendMessage("§7[ShortSpectator] §cThe plugin has been disabled!§r");
         }
+        // Checks for the spectate command and proper permissions
+        else if(args[0].equals("spectate") && sender.hasPermission("shortspectator.spectate"))
+        {
+            if(plugin.enabled)
+                plugin.getConfig().set("require-in-player", false);
+
+            else
+                plugin.getConfig().set("require-in-player", true);
+
+            plugin.saveConfig();
+            plugin.loadConfigValues();
+
+            if(plugin.enabled)
+                sender.sendMessage("§7[ShortSpectator] §aPlayers must now spectate in players!§r");
+            else
+                sender.sendMessage("§7[ShortSpectator] §cPlayers no longer have to spectate in players!§r");
+        }
 
         return true;
     }

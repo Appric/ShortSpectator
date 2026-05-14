@@ -23,5 +23,7 @@ permissions:
         description: Allows players to reload the config with /shortspectator reload
       shortspectator.toggle:
         description: Allows players to toggle the plugin with /shortspectator toggle
+      shortspectator.spectate:
+        description: Allows players to toggle the in-player mode with /shortspectator spectate
       shortspectator.bypass:
         description: Allows a player to bypass the spectator range.

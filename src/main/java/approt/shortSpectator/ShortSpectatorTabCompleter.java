@@ -19,7 +19,7 @@ public class ShortSpectatorTabCompleter implements TabCompleter {
 
         if(args.length == 1)
         {
-            List<String> subcommands = Arrays.asList("reload", "toggle");
+            List<String> subcommands = Arrays.asList("reload", "toggle", "spectate");
             List<String> availableSubCommands = new ArrayList<>();
 
             // Only auto completes for sub commands you have permission for

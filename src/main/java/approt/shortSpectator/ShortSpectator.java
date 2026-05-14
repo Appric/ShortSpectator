@@ -17,6 +17,7 @@ public final class ShortSpectator extends JavaPlugin {
     boolean sendRangeMessage;
     String message;
     boolean enabled;
+    boolean inPlayer;
 
     @Override
     public void onEnable() {
@@ -36,7 +37,7 @@ public final class ShortSpectator extends JavaPlugin {
         {
             @Override
             public void run() {
-                if(enabled) // Checks if the plugin has been enabled
+                if(enabled && !inPlayer) // Checks if the plugin has been enabled and if we are using the in-player mode
                 {
                     for (Player player : Bukkit.getOnlinePlayers()) // Gets all currently online players and iterates through them
                     {
@@ -87,9 +88,10 @@ public final class ShortSpectator extends JavaPlugin {
         super.reloadConfig();
 
         range = getConfig().getInt("range", 10);
-        sendRangeMessage = getConfig().getBoolean("sendRangeMessage", true);
-        message = getConfig().getString("rangeMessage", "§cYou must be near a player!");
+        sendRangeMessage = getConfig().getBoolean("send-range-message", true);
+        message = getConfig().getString("range-message", "§cYou must be near a player!");
         enabled = getConfig().getBoolean("enabled", true);
+        inPlayer = getConfig().getBoolean("require-in-player", false);
     }
 
     @Override
