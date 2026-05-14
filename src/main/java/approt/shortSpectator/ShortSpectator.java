@@ -15,9 +15,10 @@ public final class ShortSpectator extends JavaPlugin {
     // Config Values
     int range;
     boolean sendRangeMessage;
-    String message;
-    boolean enabled;
-    boolean inPlayer;
+    String rangeMessage;
+    public boolean enabled;
+    public boolean inPlayer;
+    public String spectateMessage;
 
     @Override
     public void onEnable() {
@@ -73,7 +74,7 @@ public final class ShortSpectator extends JavaPlugin {
                                     // Teleports the player and sends them the message if enabled
                                     player.teleport(closest);
                                     if(sendRangeMessage)
-                                        player.sendMessage(message);
+                                        player.sendMessage(rangeMessage);
                                 }
                             }
                         }
@@ -89,9 +90,10 @@ public final class ShortSpectator extends JavaPlugin {
 
         range = getConfig().getInt("range", 10);
         sendRangeMessage = getConfig().getBoolean("send-range-message", true);
-        message = getConfig().getString("range-message", "§cYou must be near a player!");
+        rangeMessage = getConfig().getString("range-message", "§cYou must be near a player!");
         enabled = getConfig().getBoolean("enabled", true);
         inPlayer = getConfig().getBoolean("require-in-player", false);
+        spectateMessage = getConfig().getString("spectator-message", "§cYou must spectate a valid player!");
     }
 
     @Override

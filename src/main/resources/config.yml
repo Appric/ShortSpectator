@@ -3,6 +3,7 @@
 enabled: true # Sets whether the plugin is currently enabled or not
 range: 10 # The range a player can be away from another player while in spectator mode
 send-range-message: true # Sets whether to send a message when a player goes too far
-range-message: "§cYou must be near a player!" # The message used when a player leaves the range
+range-message: "§cYou must be near a valid player!" # The message used when a player leaves the range
 
 require-in-player: false # Sets whether to require spectators to be spectating players rather than use the range
+spectator-message: "§cYou must spectate a valid player!" # The message used when a player tries to not spectate a player
