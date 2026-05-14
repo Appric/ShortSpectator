@@ -1,0 +1,6 @@
+#Short Spectator Config
+
+enabled: true # Sets whether the plugin is currently enabled or not
+range: 10 # The range a player can be away from another player while in spectator mode
+sendRangeMessage: true # Sets whether to send a message when a player goes too far
+rangeMessage: "§cYou must be near a player!" # The message used when a player leaves the range

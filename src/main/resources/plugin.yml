@@ -1,0 +1,27 @@
+name: ShortSpectator
+version: '${version}'
+
+main: approt.shortSpectator.ShortSpectator
+api-version: '26.1'
+
+authors: [ approt ]
+
+commands:
+  shortspectator:
+    description: The primary command for the ShortSpectator plugin.
+    aliases: [ss,short]
+    permission: shortspectator
+    permission-message: You do not have permission to use that command!
+    usage: "Incorrect usage! Example: /<command> parameter"
+
+permissions:
+  shortspectator:
+    default: op
+    description: Parent permission for all shortspectator permissions.
+    children:
+      shortspectator.reload:
+        description: Allows players to reload the config with /shortspectator reload
+      shortspectator.toggle:
+        description: Allows players to toggle the plugin with /shortspectator toggle
+      shortspectator.bypass:
+        description: Allows a player to bypass the spectator range.
